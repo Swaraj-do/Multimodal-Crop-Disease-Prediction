@@ -36,3 +36,39 @@ Environmental parameters are simulated for multimodal learning research.
 ---
 
 Research-focused implementation.
+
+## 📊 Results (PlantVillage)
+
+| Model | Inputs | Val Accuracy | Notes |
+|------|--------|-------------:|------|
+| Image-only (MobileNetV2) | Leaf image | ~97.2% | Strong baseline on clean PlantVillage images |
+| Multimodal (Ours) | Leaf image + Env (temp, humidity, rainfall, wind, season) | **97.5%** | Adds environmental context + enables risk & recommendations |
+
+### Confusion Matrices
+**Image-only:**  
+![Image-only Confusion Matrix](results/image_only_confusion_matrix.png)
+
+**Multimodal:**  
+![Multimodal Confusion Matrix](results/multimodal_confusion_matrix.png)
+
+### Training Curves (Multimodal)
+![Multimodal Accuracy](results/multimodal_training_history_acc.png)  
+![Multimodal Loss](results/multimodal_training_history_loss.png)
+
+
+## 🧠 Architecture (Multimodal Fusion)
+
+```mermaid
+flowchart LR
+A[Leaf Image 224x224x3] --> B[MobileNetV2 Backbone]
+B --> C[Global Avg Pool + Dense 256]
+D[Env Features: temp, humidity, rainfall, wind, season] --> E[MLP: Dense 64 -> Dense 32]
+C --> F[Concatenate]
+E --> F
+F --> G[Dense 128 + Dropout]
+G --> H[Softmax Layer (38 classes)]
+H --> I[Disease Probabilities]
+I --> J[Risk Level (Low/Medium/High)]
+I --> K[Recommendations]
+D --> J
+D --> K

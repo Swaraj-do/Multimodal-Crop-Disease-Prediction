@@ -1,3 +1,6 @@
+import os
+import matplotlib.pyplot as plt
+import seaborn as sns
 import pandas as pd
 import numpy as np
 import tensorflow as tf
@@ -90,8 +93,34 @@ def main():
         y_true.extend(np.argmax(y.numpy(), axis=1))
         y_pred.extend(np.argmax(p, axis=1))
 
-    print("\nConfusion Matrix:\n", confusion_matrix(y_true, y_pred))
-    print("\nClassification Report:\n", classification_report(y_true, y_pred))
+    # Create results folder
+    os.makedirs("results", exist_ok=True)
+
+    # Confusion Matrix
+    cm = confusion_matrix(y_true, y_pred)
+
+    plt.figure(figsize=(12, 10))
+    sns.heatmap(cm, annot=False, cmap="Blues")
+    plt.title("Image-Only Model Confusion Matrix")
+    plt.xlabel("Predicted")
+    plt.ylabel("Actual")
+    plt.tight_layout()
+    plt.savefig("results/image_only_confusion_matrix.png")
+    plt.close()
+
+    # Classification Report
+    report = classification_report(y_true, y_pred)
+
+    with open("results/image_only_results.txt", "w") as f:
+        f.write("Image-Only Model Results\n")
+        f.write("========================\n\n")
+        f.write("Confusion Matrix:\n")
+        f.write(str(cm))
+        f.write("\n\nClassification Report:\n")
+        f.write(report)
+
+    print("\n✅ Saved confusion matrix: results/image_only_confusion_matrix.png")
+    print("✅ Saved classification report: results/image_only_results.txt")
 
     model.save("data/image_only_model.keras")
     print("\n✅ Saved model: data/image_only_model.keras")
