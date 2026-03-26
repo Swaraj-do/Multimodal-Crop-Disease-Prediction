@@ -1,0 +1,25 @@
+============================================================
+MULTIMODAL CROP DISEASE PREDICTION RESULT
+============================================================
+Predicted Disease        : Tomato___Late_blight
+Disease Probability      : 100.00%
+Environmental Influence  : 0.672
+Risk Level               : HIGH
+
+Top Predictions:
+1. Tomato___Late_blight -> 100.00%
+2. Corn_(maize)___Northern_Leaf_Blight -> 0.00%
+3. Tomato___Leaf_Mold -> 0.00%
+
+Recommendations:
+1. Take action quickly to reduce further spread.
+2. Remove severely infected leaves or affected parts.
+3. Do not leave infected plant debris in the field.
+4. Sanitize tools after handling infected plants.
+5. Avoid overhead irrigation and reduce leaf wetness.
+6. Improve airflow by proper spacing or pruning.
+7. Ensure proper drainage to avoid excess moisture.
+8. Humidity is high, so ventilation and morning watering are important.
+9. Rainfall is high, so improve drainage and reduce water stagnation.
+10. Consult local agricultural guidelines for suitable fungicide options.
+============================================================
